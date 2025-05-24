@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ratingSchema = require("./rating").schema;
 const mongoose_delete = require("mongoose-delete");
 
 const indiviSchema = new mongoose.Schema(
@@ -6,10 +7,10 @@ const indiviSchema = new mongoose.Schema(
     name: { type: String, required: true },
     businessId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Business",
+      ref: "business",
       required: true,
     },
-    rating: { type: Number, min: 0, max: 5, default: 0 },
+    rating: [ratingSchema],
     description: { type: String },
     imageUrl: { type: String },
     createdAt: { type: Date, default: Date.now },

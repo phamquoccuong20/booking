@@ -2,9 +2,9 @@ const categoryService = require("../service/categoryService");
 
 const createCategory = async (req, res) => {
   try {
-    let { name, description, image, service } = req.body;
+    let { name, description, image, serviceId } = req.body;
 
-    const data = { name, description, image, service };
+    const data = { name, description, image, serviceId };
     let categories = await categoryService.createCategory(data);
     return res.status(200).json({ errcode: 0, data: categories });
   } catch (error) {

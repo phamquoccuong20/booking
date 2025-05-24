@@ -6,9 +6,9 @@ const categorySchema = new mongoose.Schema(
     name: String,
     description: String,
     image: String,
-    service: {
+    serviceId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Service", // 👉 Kết nối với model
+      ref: "service", // 👉 Kết nối với model
     },
     createdAt: { type: Date, default: Date.now },
   },
@@ -18,6 +18,6 @@ const categorySchema = new mongoose.Schema(
 );
 
 categorySchema.plugin(mongoose_delete, { overrideMethods: "all" });
-const Category = mongoose.model("Category", categorySchema);
+const Category = mongoose.model("category", categorySchema);
 
 module.exports = Category;

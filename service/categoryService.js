@@ -1,13 +1,16 @@
 const Category = require("../model/categogy");
+const Service = require("../model/service");
 const { eventNames } = require("../model/service");
 
 const createCategory = async (data) => {
   try {
+    let service = await Service.findOne({ title: data.serviceId });
+
     let datas = await Category.create({
       name: data.name,
       description: data.description,
       image: data.image,
-      service: data.service,
+      serviceId: service._id,
     });
 
     return datas;
@@ -19,7 +22,7 @@ const createCategory = async (data) => {
 
 const getCategory = async () => {
   try {
-    let data = await Category.find({});
+    let data = await Category.find().populate("serviceId");
 
     return data;
   } catch (error) {

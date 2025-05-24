@@ -2,7 +2,9 @@ const express = require("express");
 const usersAPI = require("../controller/userController");
 const serviceController = require("../controller/serviceController");
 const categoryController = require("../controller/categoryController");
+const Individual = require("../controller/Individual");
 const Business = require("../controller/Business");
+const RatingController = require("../controller/Rating");
 const routerAPI = express.Router();
 
 // API login
@@ -30,4 +32,13 @@ routerAPI.get("/business", Business.getAllBusiness);
 routerAPI.put("/business", Business.updateBusiness);
 routerAPI.get("/business/:id", Business.getByIdBusiness);
 
+// API individual
+routerAPI.post("/individuals", Individual.createIndividuals);
+routerAPI.get("/Individuals", Individual.getAllIndividuals);
+routerAPI.put("/Individuals", Individual.updateIndividuals);
+routerAPI.get("/Individuals/:id", Individual.getByIdIndividuals);
+
+// API rating
+routerAPI.post("/rating", RatingController.createRating);
+routerAPI.get("/rating", RatingController.getAllRating);
 module.exports = routerAPI;
