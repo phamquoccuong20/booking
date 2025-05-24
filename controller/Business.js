@@ -15,7 +15,17 @@ const createBusiness = async (req, res) => {
   }
 };
 
-const getAllBusiness = async () => {};
+const getAllBusiness = async (req, res) => {
+  try {
+    const data = await businessService.getBusiness();
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(500).json({
+      EC: -1,
+      data: {},
+    });
+  }
+};
 const updateBusiness = async () => {};
 const getByIdBusiness = async () => {};
 

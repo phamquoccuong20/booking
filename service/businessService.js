@@ -17,4 +17,6 @@ const createBusiness = async (data) => {
   }
 };
 
-module.exports = { createBusiness };
+const getBusiness = async () => {};
+
+module.exports = { createBusiness, getBusiness };
