@@ -17,6 +17,33 @@ const createBusiness = async (data) => {
   }
 };
 
-const getBusiness = async () => {};
+const getBusiness = async () => {
+  try {
+    let data = await Business.find({});
 
-module.exports = { createBusiness, getBusiness };
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+const updateBusiness = async (name, description, image, rating) => {
+  try {
+    let data = await Business.updateOne(
+      { name: name },
+      { $set: { description, image, rating } }
+    );
+
+    if (!data) {
+      return "Business không tồn tại";
+    }
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+module.exports = { createBusiness, getBusiness, updateBusiness };
