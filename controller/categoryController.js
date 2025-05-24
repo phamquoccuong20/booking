@@ -45,7 +45,7 @@ const getByIdCategory = async (req, res) => {
     let id = req.params.id;
     let categories = await categoryService.getByIdCategory(id);
     if (!categories) {
-      return res.status(404).json({ message: "Không tìm thấy user" });
+      return res.status(404).json({ message: "Không tìm thấy category" });
     }
     return res.status(200).json(categories);
   } catch (error) {

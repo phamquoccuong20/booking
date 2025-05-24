@@ -46,4 +46,19 @@ const updateBusiness = async (name, description, image, rating) => {
   }
 };
 
-module.exports = { createBusiness, getBusiness, updateBusiness };
+const getByIdBusiness = async (id) => {
+  try {
+    let data = await Business.findById(id);
+
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = {
+  createBusiness,
+  getBusiness,
+  updateBusiness,
+  getByIdBusiness,
+};

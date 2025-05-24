@@ -43,14 +43,14 @@ const updateBusiness = async (req, res) => {
     });
   }
 };
-const getByIdBusiness = async () => {
+const getByIdBusiness = async (req, res) => {
   try {
     let id = req.params.id;
-    let categories = await categoryService.getByIdCategory(id);
-    if (!categories) {
-      return res.status(404).json({ message: "Không tìm thấy user" });
+    let bunisess = await businessService.getByIdBusiness(id);
+    if (!bunisess) {
+      return res.status(404).json({ message: "Không tìm thấy bunisess" });
     }
-    return res.status(200).json(categories);
+    return res.status(200).json(bunisess);
   } catch (error) {
     res.status(500).json({ message: "Lỗi server", error: error.message });
   }
