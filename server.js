@@ -14,6 +14,10 @@ app.use(cors());
 app.use(express.json()); //utilizes the body-parser package
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => {
+  res.send("🚀 Server is running!");
+});
+
 app.use("/v1/booking/", Router);
 
 app.use(notFound);
