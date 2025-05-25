@@ -12,9 +12,7 @@ const handleRegister = async (req, res) => {
   const data = { name, email, password, phone, address };
 
   let users = await userService.registerService(data);
-  return res
-    .status(200)
-    .json({ status: 200, message: "Create Success", data: users });
+  return res.status(200).json({ data: users });
 };
 
 const getUsers = async (req, res) => {

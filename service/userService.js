@@ -5,6 +5,19 @@ const jwt = require("jsonwebtoken");
 
 const salt = bcrypt.genSaltSync(10);
 
+const checkEmail = async (email) => {
+  try {
+    let user = await Users.findOne({ email: email });
+    if (user) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    return error;
+  }
+};
+
 const loginService = async (email, password) => {
   try {
     // fetch user by email
@@ -57,16 +70,28 @@ const hashPassword = async (password) => {
 
 const registerService = async (userData) => {
   try {
-    let hashPassFrom = await hashPassword(userData.password);
-    let result = await Users.create({
-      name: userData.name,
-      email: userData.email,
-      password: hashPassFrom,
-      phone: userData.phone,
-      address: userData.address,
-    });
+    let check = await checkEmail(userData.email);
+    if (check === true) {
+      return {
+        status: 400,
+        message: "Your email is already in user, Please try",
+      };
+    } else {
+      let hashPassFrom = await hashPassword(userData.password);
+      let result = await Users.create({
+        name: userData.name,
+        email: userData.email,
+        password: hashPassFrom,
+        phone: userData.phone,
+        address: userData.address,
+      });
 
-    return result;
+      return {
+        status: 200,
+        message: "Create Success",
+        result,
+      };
+    }
   } catch (error) {
     console.log(error);
     return null;
