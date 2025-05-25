@@ -7,9 +7,10 @@ const handleLogin = async (req, res) => {
 };
 
 const handleRegister = async (req, res) => {
-  let { name, email, password, phone, address } = req.body;
+  let { name, email, password, phone, address, avatar } = req.body;
+  // const avatarPath = req.file?.path;
 
-  const data = { name, email, password, phone, address };
+  const data = { name, email, password, phone, address, avatar };
 
   let users = await userService.registerService(data);
   return res.status(200).json({ data: users });

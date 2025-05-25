@@ -6,9 +6,7 @@ const createBusiness = async (req, res) => {
 
     const data = { name, address, description, image, rating };
     let business = await businessService.createBusiness(data);
-    return res
-      .status(200)
-      .json({ status: 200, message: "Create Success", data: business });
+    return res.status(200).json(business);
   } catch (error) {
     return res.status(400).json({
       status: 400,
@@ -39,9 +37,7 @@ const updateBusiness = async (req, res) => {
       image,
       rating
     );
-    return res
-      .status(200)
-      .json({ status: 200, message: "Update Success", data });
+    return res.status(200).json(data);
   } catch (error) {
     return res.status(400).json({
       status: 400,
@@ -57,7 +53,7 @@ const getByIdBusiness = async (req, res) => {
     if (!bunisess) {
       return res.status(404).json({ message: "Không tìm thấy bunisess" });
     }
-    return res.status(200).json({ status: 200, message: "Success", bunisess });
+    return res.status(200).json(bunisess);
   } catch (error) {
     res.status(400).json({ status: 400, data: {}, message: "Bad Request" });
   }

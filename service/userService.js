@@ -2,6 +2,7 @@ require("dotenv").config();
 const Users = require("../model/users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const uploadToCloudinary = require("./uploadService");
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -68,24 +69,28 @@ const hashPassword = async (password) => {
   }
 };
 
-const registerService = async (userData) => {
+const registerService = async (data, avatarPath) => {
   try {
-    let check = await checkEmail(userData.email);
+    let check = await checkEmail(data.email);
     if (check === true) {
       return {
         status: 400,
         message: "Your email is already in user, Please try",
       };
     } else {
-      let hashPassFrom = await hashPassword(userData.password);
+      let hashPassFrom = await hashPassword(data.password);
+      // let avatarUrl = "";
+      // if (avatarPath) {
+      //   avatarUrl = await uploadToCloudinary(avatarPath); // Gọi upload ảnh
+      // }
       let result = await Users.create({
-        name: userData.name,
-        email: userData.email,
+        name: data.name,
+        email: data.email,
         password: hashPassFrom,
-        phone: userData.phone,
-        address: userData.address,
+        phone: data.phone,
+        address: data.address,
+        avatar: data.avatar,
       });
-
       return {
         status: 200,
         message: "Create Success",
@@ -101,7 +106,7 @@ const registerService = async (userData) => {
 const getAllUser = async () => {
   try {
     let result = await Users.find({}).select("-password");
-    return result;
+    return { status: 200, message: "Data success", result };
   } catch (error) {
     console.log(error);
   }

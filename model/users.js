@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     phone: String,
     address: String,
-    avata: String,
+    avatar: String,
     createdAt: { type: Date, default: Date.now },
   },
   {

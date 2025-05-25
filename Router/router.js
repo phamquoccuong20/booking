@@ -5,7 +5,18 @@ const categoryController = require("../controller/categoryController");
 const Individual = require("../controller/Individual");
 const Business = require("../controller/Business");
 const RatingController = require("../controller/Rating");
+const multer = require("multer");
+const path = require("path");
 const routerAPI = express.Router();
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, "upload/"),
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage });
 
 // API login
 routerAPI.post("/login", usersAPI.handleLogin);

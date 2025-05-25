@@ -8,4 +8,7 @@ cloudinary.config({
   // secure: true,
 });
 
+const url = cloudinary.url("cld-sample-5");
+console.log(url);
+
 module.exports = cloudinary;

@@ -10,7 +10,7 @@ const createBusiness = async (data) => {
       rating: data.rating,
     });
 
-    return result;
+    return { status: 200, message: "Create business success", result };
   } catch (error) {
     return {
       status: 500,
@@ -24,7 +24,7 @@ const getBusiness = async () => {
   try {
     let data = await Business.find({}).sort({ rating: -1 });
 
-    return data;
+    return { status: 200, message: "Success", data };
   } catch (error) {
     return {
       status: 500,
