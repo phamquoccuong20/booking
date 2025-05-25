@@ -15,8 +15,11 @@ const createCategory = async (data) => {
 
     return datas;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -26,8 +29,11 @@ const getCategory = async () => {
 
     return data;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -37,7 +43,11 @@ const getByIdCategory = async (id) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -54,8 +64,11 @@ const updateCategory = async (name, description, image) => {
 
     return data;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 

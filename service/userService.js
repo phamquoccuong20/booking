@@ -14,7 +14,7 @@ const loginService = async (email, password) => {
       const isMatchPass = await bcrypt.compare(password, user.password);
       if (!isMatchPass) {
         return {
-          EC: 1,
+          status: 200,
           EM: "nvalid Email/Password",
         };
       } else {
@@ -36,8 +36,9 @@ const loginService = async (email, password) => {
       }
     } else {
       return {
-        EC: -1,
-        EM: "Invalid Email/Password",
+        status: 500,
+        user: null,
+        message: "Internal Server Error",
       };
     }
   } catch (error) {

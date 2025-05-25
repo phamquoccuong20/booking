@@ -12,12 +12,22 @@ const handleRegister = async (req, res) => {
   const data = { name, email, password, phone, address };
 
   let users = await userService.registerService(data);
-  return res.status(200).json({ errcode: 0, data: users });
+  return res
+    .status(200)
+    .json({ status: 200, message: "Create Success", data: users });
 };
 
 const getUsers = async (req, res) => {
-  const data = await userService.getAllUser();
-  return res.status(200).json(data);
+  try {
+    const data = await userService.getAllUser();
+    return res.status(200).json(data);
+  } catch (error) {
+    return res.status(400).json({
+      status: 400,
+      data: {},
+      message: "Bad Request",
+    });
+  }
 };
 
 const changePass = async (req, res) => {
@@ -26,7 +36,11 @@ const changePass = async (req, res) => {
     let users = await userService.changePassword(email, password);
     return res.status(200).json({ users });
   } catch (error) {
-    return res.status(500).json("Error Server");
+    return res.status(400).json({
+      status: 400,
+      users: {},
+      message: "Bad Request",
+    });
   }
 };
 

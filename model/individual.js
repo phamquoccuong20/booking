@@ -12,7 +12,7 @@ const indiviSchema = new mongoose.Schema(
     },
     rating: [ratingSchema],
     description: { type: String },
-    imageUrl: { type: String },
+    image: { type: String },
     createdAt: { type: Date, default: Date.now },
   },
   {

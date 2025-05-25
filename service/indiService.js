@@ -13,19 +13,27 @@ const createIndivid = async (data) => {
 
     return result;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
 const getIndivid = async () => {
   try {
-    let data = await Individuals.find().populate("businessId");
+    let data = await Individuals.find()
+      .populate("businessId")
+      .sort({ rating: -1 });
 
     return data;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -42,8 +50,11 @@ const updateIndivid = async (name, description, image) => {
 
     return data;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -53,7 +64,11 @@ const getByIdIndivid = async (id) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 

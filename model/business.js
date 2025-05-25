@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const mongoose_delete = require("mongoose-delete");
+const ratingSchema = require("./rating").schema;
+
 
 const businessSchema = new mongoose.Schema(
   {
@@ -7,7 +9,7 @@ const businessSchema = new mongoose.Schema(
     address: String,
     description: String,
     image: String,
-    rating: { type: Number, min: 0, max: 5, default: 0 },
+    rating: [ratingSchema],
     createdAt: { type: Date, default: Date.now },
   },
   {

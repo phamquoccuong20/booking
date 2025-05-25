@@ -7,11 +7,14 @@ const createIndividuals = async (req, res) => {
     const data = { name, businessId, address, description, image, rating };
 
     let individual = await individualSer.createIndivid(data);
-    return res.status(200).json({ errcode: 0, data: individual });
+    return res
+      .status(200)
+      .json({ status: 200, message: "Create Success", data: individual });
   } catch (error) {
-    return res.status(500).json({
-      EC: -1,
+    return res.status(400).json({
+      status: 400,
       data: {},
+      message: "Bad Request",
     });
   }
 };
@@ -20,9 +23,10 @@ const getAllIndividuals = async (req, res) => {
     const data = await individualSer.getIndivid();
     return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({
-      EC: -1,
+    return res.status(400).json({
+      status: 400,
       data: {},
+      message: "Bad Request",
     });
   }
 };
@@ -30,11 +34,14 @@ const updateIndividuals = async (req, res) => {
   try {
     let { name, description, image } = req.body;
     const data = await individualSer.updateIndivid(name, description, image);
-    return res.status(200).json({ data });
+    return res
+      .status(200)
+      .json({ status: 200, message: "Update Success", data });
   } catch (error) {
-    return res.status(500).json({
-      EC: -1,
+    return res.status(400).json({
+      status: 400,
       data: {},
+      message: "Bad Request",
     });
   }
 };
@@ -47,7 +54,7 @@ const getByIdIndividuals = async (req, res) => {
     }
     return res.status(200).json(data);
   } catch (error) {
-    res.status(500).json({ message: "Lỗi server", error: error.message });
+    res.status(400).json({ status: 400, data: {}, message: "Bad Request" });
   }
 };
 

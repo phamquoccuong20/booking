@@ -12,19 +12,25 @@ const createBusiness = async (data) => {
 
     return result;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      result: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
 const getBusiness = async () => {
   try {
-    let data = await Business.find({});
+    let data = await Business.find({}).sort({ rating: -1 });
 
     return data;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -41,8 +47,11 @@ const updateBusiness = async (name, description, image, rating) => {
 
     return data;
   } catch (error) {
-    console.log(error);
-    return null;
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 
@@ -52,7 +61,11 @@ const getByIdBusiness = async (id) => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    return {
+      status: 500,
+      data: null,
+      message: "Internal Server Error",
+    };
   }
 };
 

@@ -6,11 +6,14 @@ const createCategory = async (req, res) => {
 
     const data = { name, description, image, serviceId };
     let categories = await categoryService.createCategory(data);
-    return res.status(200).json({ errcode: 0, data: categories });
+    return res
+      .status(200)
+      .json({ status: 200, message: "Create Success", data: categories });
   } catch (error) {
-    return res.status(500).json({
-      EC: -1,
+    return res.status(400).json({
+      status: 400,
       data: {},
+      message: "Bad Request",
     });
   }
 };
@@ -20,9 +23,10 @@ const getAllCategory = async (req, res) => {
     const data = await categoryService.getCategory();
     return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({
-      EC: -1,
+    return res.status(400).json({
+      status: 400,
       data: {},
+      message: "Bad Request",
     });
   }
 };
@@ -31,11 +35,14 @@ const updateCategory = async (req, res) => {
   try {
     let { name, description, image } = req.body;
     const data = await categoryService.updateCategory(name, description, image);
-    return res.status(200).json({ data });
+    return res
+      .status(200)
+      .json({ status: 200, message: "Update Success", data });
   } catch (error) {
-    return res.status(500).json({
-      EC: -1,
+    return res.status(400).json({
+      status: 400,
       data: {},
+      message: "Bad Request",
     });
   }
 };
@@ -49,7 +56,9 @@ const getByIdCategory = async (req, res) => {
     }
     return res.status(200).json(categories);
   } catch (error) {
-    res.status(500).json({ message: "Lỗi server", error: error.message });
+    res
+      .status(400)
+      .json({ status: 400, categories: {}, message: "Bad Request" });
   }
 };
 
